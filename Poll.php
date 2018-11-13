@@ -10,6 +10,11 @@ class Poll{
      $this->_connectDB();
   }
 
+  private function _createToken(){
+    if(!isset($_SESSION['token'])){
+      $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(16));
+    }
+  }
   private function _connectDB(){
     try{
       $this->_db = new \PDO(DSN, DB_USERNAME, DB_PASSWORD);
@@ -18,9 +23,21 @@ class Poll{
       throw new \Exception('Failed to connect DB');
     }
   }
-  
+
+  private function _validateToken(){
+    if(
+      !isset($_SESSION['token']) ||
+      !isset($_POST['token']) ||
+      $_SESSION['token'] !== $_POST['token']
+    ){
+      throw new \Exception('invalid token!');
+    }
+
+  }
+
   public function post(){
     try{
+      $this->_validateToken();
       $this->_validateAnswer();
       $this->_save();
       // redirect to result.php
