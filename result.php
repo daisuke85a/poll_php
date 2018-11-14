@@ -11,10 +11,14 @@ try{
   exit;
 }
 
-$results = [
-  0 => 12,
-  1 => 32,
-  2 => 44];
+$results = $poll->getResults();
+
+//var_dump($results);
+
+//$results = [
+//  0 => 12,
+//  1 => 32,
+//  2 => 44];
 
 
 ?>
@@ -35,7 +39,7 @@ $results = [
       <div class="box" id="box_<?= h($i); ?>"><?= h($results[$i]); ?></div>
       <?php endfor; ?>
     </div>
-    <a href="/"><div id="btn">Go Back</div></a>
+    <a href="./index.php"><div id="btn">Go Back</div></a>
   </form>
 </body>  
 </html>
