@@ -31,15 +31,9 @@ $results = [
   <h1>Result</h1>
   <form action="" method="post">
     <div class="row">
-      <?php ($i = 0; $i < 3; $i++) : ?>
+      <?php for($i = 0; $i < 3; $i++) : ?>
       <div class="box" id="box_<?= h($i); ?>"><?= h($results[$i]); ?></div>
       <?php endfor; ?>
-
-
-      <div class="box" id="box_1" data-id="1"></div>
-      <div class="box" id="box_2" data-id="2"></div>
-      <input type="hidden" id="answer" name="answer" value="">
-      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     </div>
     <a href="/"><div id="btn">Go Back</div></a>
   </form>
